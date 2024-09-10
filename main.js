@@ -33,9 +33,9 @@ createButton('/','operator',operatorContainer2);
 
 
 var bottons=document.getElementsByClassName("button");
-console.log(bottons);                   //HTML Collection[] not itterable so i can't use for each to loop on it 
+//console.log(bottons);                   //HTML Collection[] not itterable so i can't use for each to loop on it 
 Array.from(bottons).forEach(element => {
-    console.log(element);        //
+    //console.log(element);        
     element.addEventListener('click',function(event) {
         let value= event.target.textContent;
         if (!isNaN(value) || value == '.') {
@@ -87,10 +87,117 @@ function createButton(content,className,parent){
 }
 
 
+//////////////////////////////////////////////////////////////
 
 
+toCamelCase('shahd-abdelnabyElshamy');
+toCamelCase('shahd_elshamy');
+
+toSnakeCase('shahd-abdelnaby Elshamy');
+toSnakeCase('shahdElshamy');
+
+toKababCase('shahdAbdelnaby');
+toKababCase('shahd_elshamy');
+
+function toCamelCase(text){
+
+    let regex= /[_-\s]+(\w)/g;
+
+    let result=text.replace(regex,(match,char)=>char.toUpperCase());
+
+    console.log(`Camal Case: ${result}`);
+}
+
+function toSnakeCase(text){
+
+    let regex= /-|[A-Z\s]/g;
+
+    let result=text.replace(regex,function(match){
+        if(match==='-'){
+            return '_';
+        }else if(match===' '){
+            return '';
+        }
+        else{
+            return '_'+match.toLowerCase();
+        }
+    }
+);
+       
 
 
+    console.log(`Snake Case: ${result}`);
+}
 
+
+function toKababCase(text){
+
+    let regex= /_|[A-Z\s]/g;
+
+    let result=text.replace(regex,function(match){
+        if(match==='_'){
+            return '-';
+        }else if(match===' '){
+            return '';
+        }
+        else{
+            return '-'+match.toLowerCase();
+        }
+    }
+);
+       
+    console.log(`Kabab Case: ${result}`);
+}
+
+//////////////////////////////////////////////////////////////
+
+trimText('-');
+
+function trimText(char){
+
+    let text='shahd-Elshamy';
+
+    // let regex=/char/g;      //deal with it as string not variavle   search about word char
+
+    let regex=new RegExp(char);
+
+    let result=text.replace(regex,' ');
+
+    console.log(`The Trim Text Is: ${result}`)
+
+}
+
+///////////////////////////////////////////
+
+reduceText('classes.users.profile.center');
+reduceText('classes.users.profile');
+reduceText('classes.users');
+reduceText('classes');
+
+function reduceText(text){
+
+    let regex=/^[A-Za-z_\.]+$/g;
+
+    let array=[];
+    let result;
+
+    if(regex.test(text)){
+
+        array=text.split('.');
+
+        array.pop();
+
+        if(array.length == 0){
+            result=null;
+        }else{
+            result=array.join('.');
+        }
+
+        console.log(`The Reduced Text: ${result}`);
+
+    } 
+
+
+}
 
 
